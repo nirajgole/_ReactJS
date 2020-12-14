@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+
+label {
+	font-weight: 400;
+	font-family: 'Fira Sans', sans-serif;
+	margin: 0px 0px;
+	font-size: 0.9em;
+}
+
+.form-control {
+	border: none;
+	border-radius: 0;
+	border-bottom: 1.2px solid grey;
+	border-spacing: 0;
+	font-weight: bold;
+	outline: none;
+	box-shadow: none !important;
+}
+small {
+	color: grey;
+}
+.signUpForm {
+	width: 30%;
+	padding: 10px;
+	border-radius: 10px;
+	margin-right: 10%;
+	background-color: white;
+}
+
+@media only screen and (max-width: 768px) {
+	.signUpForm {
+		width: 100%;
+		padding: 5px;
+		margin: 0;
+		border-radius: 0;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.signUpForm {
+		width: 100%;
+		padding: 5px;
+		margin: 0;
+		border-radius: 0;
+	}
+}
+.error {
+	color: red;
+}
