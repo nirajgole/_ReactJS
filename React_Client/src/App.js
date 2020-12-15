@@ -1,13 +1,15 @@
-import { React } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { SignUp } from './components/SignUp';
+import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
-import PasswordShowHide from './components/PasswordShowHide';
+import { SignUp } from './components/SignUp';
+import RegisterUser from './components/RegisterUser';
+
 function App() {
 	return (
 		<div className='App'>
-			<SignUp />
-			<PasswordShowHide />
+			{/* <SignUp /> */}
+			<RegisterUser />
 		</div>
 	);
 }

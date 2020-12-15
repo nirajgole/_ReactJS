@@ -1,37 +1,30 @@
-import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
-class PasswordShowHide extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			hidden: true,
-			password: '',
-		};
-		this.handlePasswordChange = this.handlePasswordChange.bind(this);
-		this.toggleShow = this.toggleShow.bind(this);
-	}
-	handlePasswordChange(e) {
-		this.setState({ password: e.target.value });
-	}
-	toggleShow() {
-		this.setState({ hidden: !this.state.hidden });
-	}
-	componentDidMount() {
-		if (this.props.password) {
-			this.setState({ password: this.props.password });
-		}
-	}
-	render() {
-		return (
-			<Form.Group>
-				<Form.Control
-					type={this.state.hidden ? 'password' : 'text'}
-					value={this.state.password}
-					onChange={this.handlePasswordChange}
-				/>
-				<button onClick={this.toggleShow}>Show / Hide</button>
-			</Form.Group>
-		);
-	}
-}
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
+import "./passwordSpan.css";
+
+const PasswordShowHide = (props) => {
+  const [hidden, setHidden] = useState(true);
+
+  const handleChange = (e) => {
+    props.onChange(e);
+  };
+
+  return (
+    <>
+      <Form.Label>Password</Form.Label>
+      <Form.Control
+        type={hidden ? "password" : "text"}
+        name="password"
+        onChange={handleChange}
+        required
+      />
+      <span className="eyeSpan">
+        <i
+          onClick={() => setHidden(!hidden)}
+          className={hidden ? "fa fa-eye" : "fa fa-eye-slash"}
+        ></i>
+      </span>
+    </>
+  );
+};
 export default PasswordShowHide;
