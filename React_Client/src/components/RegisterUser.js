@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import UserService from "../services/user.service";
-import CharacterDropDown from "./HooksDropDown";
+import LocalityDropDown from "./LocalityDropDown";
 import PasswordShowHide from "./PasswordShowHide";
+import "./signup.css";
 
 const RegisterUser = () => {
   const initialState = {
@@ -12,7 +13,7 @@ const RegisterUser = () => {
     password: "",
     dateOfBirth: "",
     securityKeyword: "",
-    fileUpload: "",
+    cityId: "",
   };
   const formErrors = {
     firstName: "",
@@ -25,7 +26,7 @@ const RegisterUser = () => {
   };
   const [userData, setUserData] = useState(initialState);
   const [errors, setErrors] = useState(formErrors);
-  const [locality, setLocality] = useState(null);
+  const [file, setFile] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,13 +56,6 @@ const RegisterUser = () => {
           ? ""
           : "Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character:";
         break;
-      case "confirmPassword":
-        const pass1 = userData.password;
-        const pass2 = userData.confirmPassword;
-        errors.confirmPassword = pass1.match(pass2)
-          ? ""
-          : "Password do not match!";
-        break;
       case "dateOfBirth":
         const permittedAge = 21;
         const totalDaysToAge = permittedAge * 365;
@@ -71,6 +65,7 @@ const RegisterUser = () => {
             : "Date of birth is not valid!";
         break;
       case "fileUpload":
+        setFile(event.target.files[0]);
         errors.fileUpload = validFileExtension.test(value)
           ? ""
           : "Invalid file type";
@@ -81,23 +76,33 @@ const RegisterUser = () => {
     setErrors(errors);
   };
   const handleSubmit = (event) => {
-    console.log(userData);
-    console.log("C_ID: " + locality);
     event.preventDefault();
-    // let formdData = new FormData();
-    // formData.append("fname", "firstName");
-    let data = {
-      fname: userData.firstName,
-      lname: userData.lastName,
-      email: userData.email,
-      password: userData.password,
-      dob: userData.dateOfBirth,
-      c_id: locality,
-      certificates: userData.fileUpload,
-      mothername: userData.securityKeyword,
-    };
+    console.log(userData);
+    console.log("C_ID: " + userData.cityId);
+
+    let formData = new FormData();
+    formData.append("fname", userData.firstName);
+    formData.append("lname", userData.lastName);
+    formData.append("email", userData.email);
+    formData.append("password", userData.password);
+    formData.append("dob", userData.dateOfBirth);
+    formData.append("c_id", userData.cityId);
+    formData.append("mothername", userData.mothername);
+    formData.append("certificates", file.name);
+    formData.append("file", file);
+    // let data = {
+    //   fname: userData.firstName,
+    //   lname: userData.lastName,
+    //   email: userData.email,
+    //   password: userData.password,
+    //   dob: userData.dateOfBirth,
+    //   c_id: userData.cityId,
+    //   certificates: userData.fileUpload,
+    //   mothername: userData.securityKeyword,
+    // };
+
     if (validateForm(errors)) {
-      UserService.createUser(data)
+      UserService.createUser(formData)
         .then(() => {
           console.info("Valid Form", userData.firstName);
         })
@@ -177,10 +182,9 @@ const RegisterUser = () => {
             <p className="error">{errors.dateOfBirth}</p>
           )}
         </Form.Group>
-        <Form.Group>
-          <Form.Label>Select Locality</Form.Label>
-          <CharacterDropDown getValue={(value) => setLocality(value)} />
-        </Form.Group>
+
+        <LocalityDropDown onChange={handleChange} />
+
         <Form.Group>
           <Form.Label>Upload certificate</Form.Label>
           <Form.Control
