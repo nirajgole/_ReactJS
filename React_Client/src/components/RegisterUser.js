@@ -27,6 +27,7 @@ const RegisterUser = () => {
   const [userData, setUserData] = useState(initialState);
   const [errors, setErrors] = useState(formErrors);
   const [file, setFile] = useState("");
+  const [ifExistsMail, setIfExistsMail] = useState([]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -48,9 +49,7 @@ const RegisterUser = () => {
             ? ""
             : "Name is not valid";
         break;
-      case "email":
-        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
-        break;
+
       case "password":
         errors.password = validPassword.test(value)
           ? ""
@@ -87,19 +86,9 @@ const RegisterUser = () => {
     formData.append("password", userData.password);
     formData.append("dob", userData.dateOfBirth);
     formData.append("c_id", userData.cityId);
-    formData.append("mothername", userData.mothername);
+    formData.append("mothername", userData.securityKeyword);
     formData.append("certificates", file.name);
     formData.append("file", file);
-    // let data = {
-    //   fname: userData.firstName,
-    //   lname: userData.lastName,
-    //   email: userData.email,
-    //   password: userData.password,
-    //   dob: userData.dateOfBirth,
-    //   c_id: userData.cityId,
-    //   certificates: userData.fileUpload,
-    //   mothername: userData.securityKeyword,
-    // };
 
     if (validateForm(errors)) {
       UserService.createUser(formData)
@@ -112,6 +101,31 @@ const RegisterUser = () => {
     } else {
       console.error("Invalid Form");
     }
+  };
+
+  const onBLurChange = (e) => {
+    e.preventDefault();
+    const myJson = JSON.stringify({ checkMail: e.target.value });
+    UserService.checkIfUserMailExist(myJson)
+      .then((res) => {
+        setIfExistsMail(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    if (e.target.name === "email") errors.email = validateEmail(e.target.value);
+  };
+
+  const validateEmail = (value) => {
+    if (validEmailRegex.test(value)) {
+      if (ifExistsMail.length !== 0) {
+        return "Email already exists!";
+      } else {
+        return true;
+      }
+    }
+    return "Email is invalid";
   };
 
   return (
@@ -155,7 +169,9 @@ const RegisterUser = () => {
             name="email"
             value={userData.email}
             onChange={handleChange}
+            onBlur={onBLurChange}
             required
+            autoComplete="false"
           />
           {errors.email.length > 0 && (
             <span className="error">{errors.email}</span>
