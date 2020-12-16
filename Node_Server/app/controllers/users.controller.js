@@ -56,10 +56,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Users from the database.
 exports.findAllUsers = (req, res) => {
-  const fname = req.query.fname;
-  var condition = fname ? { fname: { [Op.like]: `%${fname}%` } } : null;
-
-  User.findAll({ where: condition })
+  User.findAll()
     .then((data) => {
       res.send(data);
     })
@@ -71,12 +68,13 @@ exports.findAllUsers = (req, res) => {
     });
 };
 
-exports.getEmails = (req, res) => {
+exports.checkIfUserMailExist = (req, res) => {
+  const enteredMail = req.body.checkMail;
+  console.log(enteredMail);
   db.sequelize
-    .query("select email from users")
+    .query(`select email from users where email="${enteredMail}"`)
     .then((data) => {
-      console.log(data);
-      res.send(data);
+      res.send(data[0]);
     })
     .catch((err) => {
       res.status(500).send({
