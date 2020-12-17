@@ -1,0 +1,46 @@
+.outerWrapper {
+  width: 40%;
+  margin: 0 auto;
+}
+.com {
+  background-color: white;
+  margin: 5px 0px;
+}
+
+.category {
+  height: auto;
+}
+
+.title {
+  font: bold 1.6rem Arial;
+  text-transform: capitalize;
+}
+
+.description {
+  font: italic 0.9rem Arial;
+}
+.author-date {
+  font: 20px 0.9rem Arial;
+}
+
+.newsImage img {
+  height: 400px;
+  width: 100%;
+}
+
+.content {
+}
+
+@media only screen and (max-width: 769px) {
+  .outerWrapper {
+    width: 100%;
+  }
+}
+
+.shareAndReportButton {
+  float: right;
+  margin: 1%;
+  color: black;
+  background-color: #ff8906;
+  border: none;
+}

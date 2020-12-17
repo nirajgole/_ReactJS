@@ -1,41 +1,41 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
 
 label {
-	font-weight: 400;
-	font-family: 'Fira Sans', sans-serif;
-	margin: 0px 0px;
-	font-size: 0.9em;
+  font-weight: 400;
+  font-family: "Fira Sans", sans-serif;
+  margin: 0px 0px;
+  font-size: 0.9em;
 }
 
 .form-control {
-	border: none;
-	border-radius: 0;
-	border-bottom: 1.2px solid grey;
-	border-spacing: 0;
-	font-weight: bold;
-	outline: none;
-	box-shadow: none !important;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1.2px solid grey;
+  border-spacing: 0;
+  font-weight: bold;
+  outline: none;
+  box-shadow: none !important;
 }
 small {
-	color: grey;
+  color: grey;
 }
 .signUpForm {
-	width: 30%;
-	padding: 10px;
-	border-radius: 10px;
-	margin-left: 57%;
-	background-color: white;
+  width: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 57%;
+  background-color: white;
 }
 
 @media only screen and (max-width: 768px) {
-	.signUpForm {
-		width: 100%;
-		padding: 5px;
-		margin: 0;
-		border-radius: 0;
-	}
+  .signUpForm {
+    width: 100%;
+    padding: 5px;
+    margin: 0;
+    border-radius: 0;
+  }
 }
 
 .error {
-	color: red;
+  color: red;
 }
