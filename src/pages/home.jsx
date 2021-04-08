@@ -18,7 +18,7 @@ const Home = () => {
     await Axios.delete(`http://localhost:3003/users/${id}`);
     loadUsers();
   };
-  console.log(users);
+
   return (
     <div className='container'>
       <h1 className='py-4'>Inside home page</h1>
@@ -50,7 +50,7 @@ const Home = () => {
                   Edit
                 </Link>
                 <Link
-                  className='btn btn-danger mr-2'
+                  className='btn btn-danger'
                   onClick={() => deleteUser(user.id)}
                 >
                   Delete
