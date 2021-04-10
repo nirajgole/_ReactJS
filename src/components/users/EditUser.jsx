@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import userService from '../../config/user.service';
@@ -15,8 +14,12 @@ const EditUser = () => {
   });
 
   useEffect(() => {
+    const loadUser = async () => {
+      const result = await userService.viewUser(id);
+      setUser(result.data);
+    };
     loadUser();
-  }, []);
+  }, [id]);
 
   const onInputChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -29,10 +32,6 @@ const EditUser = () => {
   };
   const { name, username, email, website, phone } = user;
 
-  const loadUser = async () => {
-    const result = await userService.viewUser(id);
-    setUser(result.data);
-  };
   return (
     <div>
       <div className='container'>
