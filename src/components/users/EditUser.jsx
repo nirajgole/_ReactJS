@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import userService from '../../config/user.service';
 
 const EditUser = () => {
   const { id } = useParams();
@@ -23,13 +24,13 @@ const EditUser = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    await Axios.put(`http://localhost:3003/users/${id}`, user);
+    await userService.updateUser(id, user);
     history.push('/');
   };
   const { name, username, email, website, phone } = user;
 
   const loadUser = async () => {
-    const result = await Axios.get(`http://localhost:3003/users/${id}`);
+    const result = await userService.viewUser(id);
     setUser(result.data);
   };
   return (
