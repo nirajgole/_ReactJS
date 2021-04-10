@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
+import userService from '../config/user.service';
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -10,15 +10,15 @@ const Home = () => {
   }, []);
 
   const loadUsers = async () => {
-    const result = await Axios.get('http://localhost:3003/users');
+    const result = await userService.getUsers();
     setUsers(result.data.reverse());
   };
 
   const deleteUser = async id => {
-    await Axios.delete(`http://localhost:3003/users/${id}`);
+    await userService.deleteUser(id);
     loadUsers();
   };
-  console.log(users);
+
   return (
     <div className='container'>
       <h1 className='py-4'>Inside home page</h1>
@@ -50,7 +50,7 @@ const Home = () => {
                   Edit
                 </Link>
                 <Link
-                  className='btn btn-danger mr-2'
+                  className='btn btn-danger'
                   onClick={() => deleteUser(user.id)}
                 >
                   Delete

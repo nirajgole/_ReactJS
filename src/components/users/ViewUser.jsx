@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Axios from 'axios';
+import userService from '../../config/user.service';
 
 const ViewUser = () => {
   const [user, setUser] = useState({
@@ -17,7 +18,7 @@ const ViewUser = () => {
   }, []);
 
   const loadUser = async () => {
-    const result = await Axios.get(`http://localhost:3003/users/${id}`);
+    const result = await userService.viewUser(id);
     setUser(result.data);
   };
   return (

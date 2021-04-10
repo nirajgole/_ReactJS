@@ -1,6 +1,6 @@
-import Axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import userService from '../../config/user.service';
 
 const AddUser = () => {
   const history = useHistory();
@@ -18,7 +18,8 @@ const AddUser = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    await Axios.post('http://localhost:3003/users', user);
+    // await Axios.post('http://localhost:3003/users', user);
+    await userService.createUser(user);
     history.push('/');
   };
   const { name, username, email, website, phone } = user;
