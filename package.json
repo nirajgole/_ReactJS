@@ -2,7 +2,7 @@
   "name": "crud-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nirajgole.github.io/REACT-CRUD-APP/",
+  "homepage": "https://nirajgole.github.io/REACT-CRUD-APP",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
