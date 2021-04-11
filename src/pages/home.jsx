@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import userService from '../config/user.service';
-import Table from './table/table';
+import Table from '../components/table/table';
+import { UserContext } from '../components/users/UserContext';
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const { users, setUsers } = useContext(UserContext);
 
   useEffect(() => {
     loadUsers();
@@ -14,18 +15,13 @@ const Home = () => {
     setUsers(result.data.reverse());
   };
 
-  const deleteUser = async id => {
-    await userService.deleteUser(id);
-    loadUsers();
-  };
-
   return (
     <div className='container'>
       <h1 className='py-4'>List of users</h1>
       <Table
-        users={users}
-        deleteUser={deleteUser}
-        columns={['#', 'Name', 'User Name', 'Email', 'Action']}
+        tableTitle='User list'
+        columnData={users}
+        columnHeading={['#', 'Name', 'User Name', 'Email', 'Action']}
       />
     </div>
   );
