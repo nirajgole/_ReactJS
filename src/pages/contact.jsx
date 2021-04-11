@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../components/users/UserContext';
 
 const Contact = () => {
-  const { users, setUsers } = useContext(UserContext);
+  const { users } = useContext(UserContext);
   return (
     <div className='container'>
       {users.map((data, index) => (

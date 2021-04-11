@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import userService from '../../config/user.service';
-import { UserContext } from './UserContext';
 
 const EditUser = () => {
   const { id } = useParams();

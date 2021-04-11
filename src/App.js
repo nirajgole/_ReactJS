@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import About from './pages/about';
-import Home from './pages/home';
+import Home from './pages/home/home';
 import Contact from './pages/contact';
 import Navbar from './layout/navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -9,6 +9,7 @@ import ViewUser from './components/users/ViewUser';
 import AddUser from './components/users/AddUser';
 import EditUser from './components/users/EditUser';
 import { UserContext } from './components/users/UserContext';
+import GridView from './layout/card/grid-view';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -26,6 +27,7 @@ function App() {
             <Route exact path='/users/add' component={AddUser} />
             <Route exact path='/users/edit/:id' component={EditUser} />
             <Route exact path='/users/:id' component={ViewUser} />
+            <Route exact path='/grid-view' component={GridView} />
             <Route component={NotFound} />
           </Switch>
         </div>
