@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import userService from '../config/user.service';
+import Table from '../components/table/table';
+import { UserContext } from '../components/users/UserContext';
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const { users, setUsers } = useContext(UserContext);
 
   useEffect(() => {
     loadUsers();
@@ -14,52 +15,14 @@ const Home = () => {
     setUsers(result.data.reverse());
   };
 
-  const deleteUser = async id => {
-    await userService.deleteUser(id);
-    loadUsers();
-  };
-
   return (
     <div className='container'>
-      <h1 className='py-4'>Inside home page</h1>
-      <table className='table'>
-        <thead className='thead-dark'>
-          <tr>
-            <th scope='col'>#</th>
-            <th scope='col'>Name</th>
-            <th scope='col'>User Name</th>
-            <th scope='col'>Email</th>
-            <th scope='col'>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <th scope='row'>{index + 1}</th>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>
-                <Link className='btn btn-primary mr-2' to={`users/${user.id}`}>
-                  View
-                </Link>
-                <Link
-                  className='btn btn-outline-primary mr-2'
-                  to={`users/edit/${user.id}`}
-                >
-                  Edit
-                </Link>
-                <Link
-                  className='btn btn-danger'
-                  onClick={() => deleteUser(user.id)}
-                >
-                  Delete
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h1 className='py-4'>List of users</h1>
+      <Table
+        tableTitle='User list'
+        columnData={users}
+        columnHeading={['#', 'Name', 'User Name', 'Email', 'Action']}
+      />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Axios from 'axios';
 import userService from '../../config/user.service';
 
 const ViewUser = () => {
@@ -11,21 +10,24 @@ const ViewUser = () => {
     website: '',
     phone: ''
   });
+
   const { id } = useParams();
 
   useEffect(() => {
     loadUser();
-  }, []);
+  }, [id]);
 
   const loadUser = async () => {
     const result = await userService.viewUser(id);
     setUser(result.data);
   };
+
+  const deleteUser = async id => {
+    await userService.deleteUser(id);
+    loadUser();
+  };
   return (
     <div className='container py-4'>
-      <Link className='btn btn-primary' to='/'>
-        back to Home
-      </Link>
       <h1 className='display-4'>User Id: {id}</h1>
       <hr />
       <ul className='list-group w-50'>
@@ -34,6 +36,24 @@ const ViewUser = () => {
         <li className='list-group-item'>email: {user.email}</li>
         <li className='list-group-item'>phone: {user.phone}</li>
         <li className='list-group-item'>website: {user.website}</li>
+        <li className='list-group-item'>
+          <Link
+            className='btn btn-danger float-right '
+            onClick={() => deleteUser(user.id)}
+            to={`/`}
+          >
+            Delete
+          </Link>
+          <Link
+            className='btn btn-outline-primary float-right mr-2'
+            to={`/users/edit/${user.id}`}
+          >
+            Edit
+          </Link>
+        </li>
+        <Link className='btn btn-primary' to='/'>
+          back to Home
+        </Link>
       </ul>
     </div>
   );

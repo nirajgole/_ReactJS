@@ -5,9 +5,9 @@ const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
       <div className='container'>
-        {/* <Link className='navbar-brand' to='/'>
-          Recat User
-        </Link> */}
+        <Link className='navbar-brand' to='/'>
+          REACT-CRUD-APP
+        </Link>
         <button
           className='navbar-toggler'
           type='button'
