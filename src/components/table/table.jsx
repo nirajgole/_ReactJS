@@ -6,7 +6,7 @@ const Table = props => {
   const { columnData, columnHeading, tableTitle } = props;
 
   return (
-    <div>
+    <>
       <h2>{tableTitle}</h2>
       <table className='table'>
         <thead className='thead-dark'>
@@ -34,7 +34,7 @@ const Table = props => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

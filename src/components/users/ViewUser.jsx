@@ -15,7 +15,7 @@ const ViewUser = () => {
 
   useEffect(() => {
     loadUser();
-  }, [id]);
+  }, []);
 
   const loadUser = async () => {
     const result = await userService.viewUser(id);
@@ -28,11 +28,11 @@ const ViewUser = () => {
   };
   return (
     <div className='container py-4'>
-      <h1 className='display-4'>User Id: {id}</h1>
+      <h1 className='display-4'>Name: {user.name}</h1>
       <hr />
       <ul className='list-group w-50'>
-        <li className='list-group-item'>name: {user.name}</li>
-        <li className='list-group-item'>user name: {user.username}</li>
+        <li className='list-group-item'>user id: {id}</li>
+        <li className='list-group-item'>username: {user.username}</li>
         <li className='list-group-item'>email: {user.email}</li>
         <li className='list-group-item'>phone: {user.phone}</li>
         <li className='list-group-item'>website: {user.website}</li>
