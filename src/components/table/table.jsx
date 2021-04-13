@@ -1,45 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-const Table = props => {
+import { Container, Table } from 'semantic-ui-react';
+const DataTable = props => {
   const { columnData, columnHeading, tableTitle } = props;
 
   return (
-    <>
-      <h2>{tableTitle}</h2>
-      <table className='table'>
-        <thead className='thead-dark'>
-          <tr>
+    <Container>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.Cell>{tableTitle}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
             {columnHeading.map((col, index) => (
-              <th key={index} scope='col'>
-                {col}
-              </th>
+              <Table.HeaderCell key={index}>{col}</Table.HeaderCell>
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {columnData.map(({ id, name, username, email }, index) => (
-            <tr key={index}>
-              <th scope='row'>{index + 1}</th>
-              <td>{name}</td>
-              <td>{username}</td>
-              <td>{email}</td>
-              <td>
+            <Table.Row key={index}>
+              <Table.Cell scope='row'>{index + 1}</Table.Cell>
+              <Table.Cell>{name}</Table.Cell>
+              <Table.Cell>{username}</Table.Cell>
+              <Table.Cell>{email}</Table.Cell>
+              <Table.Cell>
                 <Link className='btn btn-primary mr-2' to={`/users/${id}`}>
                   View
                 </Link>
-              </td>
-            </tr>
+              </Table.Cell>
+            </Table.Row>
           ))}
-        </tbody>
-      </table>
-    </>
+        </Table.Body>
+      </Table>
+    </Container>
   );
 };
 
-Table.propTypes = {
-  columnData: PropTypes.arrayOf(PropTypes.object).isRequired
+DataTable.propTypes = {
+  columnData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default Table;
+export default DataTable;

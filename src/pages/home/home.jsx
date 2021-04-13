@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 import userService from '../../config/user.service';
-import Table from '../../components/table/table';
 import { UserContext } from '../../components/users/UserContext';
 import GridView from '../../layout/card/grid-view';
 import { BsGrid, BsListUl } from 'react-icons/bs';
 import './home.styles.css';
+import DataTable from '../../components/table/table';
 const Home = () => {
   const { users, setUsers } = useContext(UserContext);
   const [view, setView] = useState(false);
@@ -29,7 +29,7 @@ const Home = () => {
       </div>
       <div className='row'>
         {view ? (
-          <Table
+          <DataTable
             tableTitle='User list'
             columnData={users}
             columnHeading={['#', 'Name', 'User Name', 'Email', 'Action']}

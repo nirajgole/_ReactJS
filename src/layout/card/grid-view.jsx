@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { UserContext } from '../../components/users/UserContext';
 import CardView from './card-view';
 import './card.styles.css';
@@ -6,13 +7,15 @@ import './card.styles.css';
 const GridView = () => {
   const { users } = useContext(UserContext);
   return (
-    <div className='container'>
-      <div className='grid-view'>
+    <>
+      <Grid relaxed columns={3}>
         {users.map((item, index) => (
-          <CardView key={index} item={item} />
+          <Grid.Column key={index}>
+            <CardView item={item} />
+          </Grid.Column>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </>
   );
 };
 
