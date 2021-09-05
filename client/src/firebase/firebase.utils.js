@@ -24,7 +24,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
     try {
       await userRef.set({
         displayName,
@@ -49,7 +48,6 @@ export const addCollectionAndDocuments = async (
   const batch = firestore.batch();
   objectsToAdd.forEach(obj => {
     const newDocRef = collectionRef.doc();
-    console.log(newDocRef);
     batch.set(newDocRef, obj);
   });
 
@@ -57,7 +55,7 @@ export const addCollectionAndDocuments = async (
 };
 
 export const convertCollectionsSnapshotToMap = collections => {
-  const transformCollections = collections.docs.map(doc => {
+  const transformedCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
 
     return {
@@ -67,11 +65,11 @@ export const convertCollectionsSnapshotToMap = collections => {
       items
     };
   });
-  transformCollections.reduce((acc, collection) => {
-    console.log(collection);
-    acc[collection.title.toLowerCase()] = collection;
-    return acc;
-  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
 };
 
 export const getCurrentUser = () => {
@@ -82,6 +80,7 @@ export const getCurrentUser = () => {
     }, reject);
   });
 };
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 

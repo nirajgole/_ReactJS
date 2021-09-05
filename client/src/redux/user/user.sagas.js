@@ -10,7 +10,6 @@ import UserActionTypes from './user.types';
 import {
   signInFailure,
   signInSuccess,
-  checkUserSession,
   signOutSuccess,
   signOutFailure,
   signUpSuccess,
