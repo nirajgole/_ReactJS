@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "name": "Hello There",
+      "username": "Jovici",
+      "email": "jovi@nan.com",
+      "website": "jamStack.io",
+      "phone": "789461313",
+      "id": 3
+    },
+    {
+      "name": "Brayn Adams",
+      "username": "b_adams",
+      "email": "badams@mail.com",
+      "website": "www.help.io",
+      "phone": "78946123213",
+      "id": 4
+    },
+    {
+      "name": "Jessica Calvin",
+      "username": "new_well_county",
+      "email": "js@mail.com",
+      "website": "js.com",
+      "phone": "9874563120",
+      "id": 5
+    },
+    {
+      "name": "FOX",
+      "username": "fox_entertainment",
+      "email": "entertainement@fox.com",
+      "website": "www.fox.com",
+      "phone": "9874563210",
+      "id": 7
+    }
+  ]
+}
