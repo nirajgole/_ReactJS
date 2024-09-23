@@ -1,0 +1,3 @@
+[submodule "monsters-react-app"]
+	path = monsters-react-app
+	url = https://github.com/nirajgole/monsters-react-app.git
